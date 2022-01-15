@@ -1,14 +1,24 @@
 const { MongoClient } = require("mongodb");
 
+let client = null;
+let db = null;
+
+const {
+	SERVER_IP,
+	DB_NAME,
+	DB_USER,
+	DB_PASS,
+} = process.env;
+
 const URI =
-	"mongodb://user:password@localhost:27017/TeamCottonCandy?retryWrites=true&writeConcern=majority";
+`mongodb://${DB_USER}:${DB_PASS}@${SERVER_IP}:27017/${DB_NAME}?retryWrites=true&writeConcern=majority`;
 
 async function getConnection() {
-	const client = new MongoClient(URI);
+	client = new MongoClient(URI);
 
 	await client.connect();
 	console.log("DB connected");
-	const db = client.db("TeamCottonCandy");
+	db = client.db(DB_NAME);
 
 	return db;
 	// finally {
@@ -18,4 +28,6 @@ async function getConnection() {
 
 module.exports = {
 	getConnection,
+	client,
+  db,
 };
