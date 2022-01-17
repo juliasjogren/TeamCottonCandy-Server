@@ -15,6 +15,7 @@
     "mongodb": "^4.3.0"
   },
   "devDependencies": {
+    "dotenv": "^12.0.3",
     "nodemon": "^2.0.15"
   }
 }
