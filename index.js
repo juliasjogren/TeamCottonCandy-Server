@@ -9,14 +9,15 @@ const PORT = 3000;
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+	res.send("Hello World!");
 });
 
 registerRoutes(app);
 
 app.listen(PORT, () => {
-  console.log(`TeamCottonCandy server listening at http://localhost:${PORT}`);
-  getConnection();
+	console.log(`TeamCottonCandy server listening at http://localhost:${PORT}`);
+	getConnection();
 });
