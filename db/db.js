@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
 const {
   SERVER_IP,
@@ -8,17 +8,12 @@ const {
 } = process.env;
 
 const URI = `mongodb://${DB_USER}:${encodeURIComponent(DB_PASS)}@${SERVER_IP}:27017/${DB_NAME}?retryWrites=true&writeConcern=majority`;
-const client = new MongoClient(URI);
-let db = null;
 
 async function getConnection() {
   try {
     console.log('Attempting to connect to ', URI)
-    await client.connect();
+    await mongoose.connect(URI);
     console.log("DB connected");
-    db = client.db(DB_NAME);
-  
-    return db;
   } catch (error) {
     console.warn(error)
   }
@@ -26,6 +21,4 @@ async function getConnection() {
 
 module.exports = {
   getConnection,
-  client,
-  db,
 };
