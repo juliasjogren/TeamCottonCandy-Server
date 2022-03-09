@@ -20,7 +20,14 @@ async function createLan(req, res) {
 	res.end();
 }
 
+async function addGameToLan(req, res) {
+	console.log(req.data);
+
+	res.send(req.body);
+}
+
 module.exports = {
 	getAllLans,
 	createLan,
+	addGameToLan,
 };
